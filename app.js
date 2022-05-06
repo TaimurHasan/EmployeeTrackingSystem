@@ -21,10 +21,17 @@ const promptMainMenu = () => {
             case 'View all roles':
                 queryObj.getAllRoles();
                 break;
+            case 'View all employees':
+                queryObj.getAllEmployees();
+                break; 
             default: 
                 console.log('Pending');
         }
-    });
+    })
+    .then(() => {
+        // timeout to return to main menu to prevent overlap in console
+        setTimeout(promptMainMenu, 300)
+    })
 };
 
 promptMainMenu();
