@@ -2,10 +2,18 @@ const inquirer = require('inquirer');
 const db = require('./db/connection');
 const addQuery = require('./lib/addQueries');
 const getQuery = require('./lib/getQueries');
+const choiceQuery = require('./lib/choiceQueries');
 
-// main inquirer prompt function to provide actions to user
-const promptMainMenu = () => {
-    inquirer.prompt([
+// get choices from sql query to use in inquirer prompts
+const getDepartmentList = () => {
+    const getChoices = new choiceQuery;
+    const departmentChoices = getChoices.allDepartments();
+    return departmentChoices
+}
+
+// main inquirer prompts for user input
+const promptMainMenu = (choiceList) => {
+    return inquirer.prompt([
         {
             name: 'action',
             type: 'list',
@@ -42,17 +50,24 @@ const promptMainMenu = () => {
         {
             name: 'roleDepartment',
             type: 'list',
-            message: 'Please enter the name role name',
-            choices: ['Sales', 'Finance', 'Engineering', 'Legal'],
+            message: 'Please choose a department for this role',
+            choices: getDepartmentList,
             when: ({ action }) => action === 'Add a role',
-        },
+        }
     ])
+};
+
+
+// main function to initialize application
+const init = () => {
+    // getChoiceList()
+    promptMainMenu()
     .then(({ action, ...addPrompts }) => {
         const get = new getQuery;
         const add = new addQuery;
         switch(action) {
             case 'View all departments':
-                get.allDepartmentNames();
+                get.allDepartments();
                 break;
             case 'View all roles':
                 get.allRoles();
@@ -73,8 +88,9 @@ const promptMainMenu = () => {
     })
     .then(() => {
         // timeout to return to main menu to prevent overlap in console
-        setTimeout(promptMainMenu, 300)
+        setTimeout(init, 300)
     })
 };
 
-promptMainMenu();
+init();
+// getChoiceList();
