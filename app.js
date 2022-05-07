@@ -1,31 +1,42 @@
 const inquirer = require('inquirer');
 const db = require('./db/connection');
-const orgQuery = require('./lib/queries');
+const addQuery = require('./lib/addQueries');
+const getQuery = require('./lib/getQueries');
 
 // main inquirer prompt function to provide actions to user
 const promptMainMenu = () => {
     inquirer.prompt([
-    {
-        name: 'action',
-        type: 'list',
-        message: 'What would you like to do?',
-        choices: ['View all departments', 'View all roles', 'View all employees', 'add a department', 'add a role', 'add an employee', 'update employee role']
-    }
+        {
+            name: 'action',
+            type: 'list',
+            message: 'What would you like to do?',
+            choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update employee role']
+        },
+        {
+            name: 'department',
+            type: 'input',
+            message: 'Please enter a name for the new department',
+            when: ({ action }) => action === 'Add a department'
+        }
     ])
-    .then(({ action }) => {
-        const queryObj = new orgQuery;
+    .then(({ action, ...addPrompt }) => {
+        const get = new getQuery;
+        const add = new addQuery;
         switch(action) {
             case 'View all departments':
-                queryObj.getAllDepartments();
+                get.allDepartments();
                 break;
             case 'View all roles':
-                queryObj.getAllRoles();
+                get.allRoles();
                 break;
             case 'View all employees':
-                queryObj.getAllEmployees();
-                break; 
+                get.allEmployees();
+                break;
+            case 'Add a department':
+                add.department(addPrompt.department);
+                break;
             default: 
-                console.log('Pending');
+                console.log(addPrompt.department);
         }
     })
     .then(() => {
