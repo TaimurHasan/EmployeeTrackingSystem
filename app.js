@@ -16,15 +16,43 @@ const promptMainMenu = () => {
             name: 'department',
             type: 'input',
             message: 'Please enter a name for the new department',
-            when: ({ action }) => action === 'Add a department'
-        }
+            when: ({ action }) => action === 'Add a department',
+        },
+        {
+            name: 'roleName',
+            type: 'input',
+            message: 'Please enter the name of this role',
+            when: ({ action }) => action === 'Add a role',
+        },
+        {
+            name: 'roleSalary',
+            type: 'input',
+            message: 'Please enter the salary for this role',
+            when: ({ action }) => action === 'Add a role',
+            // validate that user input for salary exists and is a number
+            validate: (input) => {
+                if(input && !isNaN(input)) {
+                    return true; 
+                } else {
+                    console.log('Please enter a valid number!');
+                    return false;
+                }
+            }
+        },
+        {
+            name: 'roleDepartment',
+            type: 'list',
+            message: 'Please enter the name role name',
+            choices: ['Sales', 'Finance', 'Engineering', 'Legal'],
+            when: ({ action }) => action === 'Add a role',
+        },
     ])
-    .then(({ action, ...addPrompt }) => {
+    .then(({ action, ...addPrompts }) => {
         const get = new getQuery;
         const add = new addQuery;
         switch(action) {
             case 'View all departments':
-                get.allDepartments();
+                get.allDepartmentNames();
                 break;
             case 'View all roles':
                 get.allRoles();
@@ -33,10 +61,14 @@ const promptMainMenu = () => {
                 get.allEmployees();
                 break;
             case 'Add a department':
-                add.department(addPrompt.department);
+                add.department(addPrompts.department);
+                break;
+            case 'Add a role':
+                const { roleName, roleSalary, roleDepartment } = addPrompts;
+                add.role(roleName, roleSalary, roleDepartment);
                 break;
             default: 
-                console.log(addPrompt.department);
+                console.log(addPrompts.department);
         }
     })
     .then(() => {
