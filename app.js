@@ -4,15 +4,38 @@ const addQuery = require('./lib/addQueries');
 const getQuery = require('./lib/getQueries');
 const choiceQuery = require('./lib/choiceQueries');
 
-// get choices from sql query to use in inquirer prompts
+// get department choices from sql query to use in inquirer prompts
 const getDepartmentList = () => {
     const getChoices = new choiceQuery;
-    const departmentChoices = getChoices.allDepartments();
-    return departmentChoices
-}
+    
+    // contain needed choice list
+    const choices = getChoices.allDepartments()
+    // return departmentChoices
+    return choices;
+};
+
+// get role choices from sql query to use in inquirer prompts
+const getRoleList = () => {
+    const getChoices = new choiceQuery;
+    
+    // contain needed choice list
+    const choices = getChoices.allRoles()
+    // return roleChoices
+    return choices;
+};
+
+// get manager choices from sql query to use in inquirer prompts
+const getManagerList = () => {
+    const getChoices = new choiceQuery;
+    
+    // contain needed choice list
+    const choices = getChoices.allEmployees()
+    // return managerChoices
+    return choices;
+};
 
 // main inquirer prompts for user input
-const promptMainMenu = (choiceList) => {
+const promptMainMenu = () => {
     return inquirer.prompt([
         {
             name: 'action',
@@ -53,6 +76,32 @@ const promptMainMenu = (choiceList) => {
             message: 'Please choose a department for this role',
             choices: getDepartmentList,
             when: ({ action }) => action === 'Add a role',
+        },
+        {
+            name: 'employeeFirstName',
+            type: 'input',
+            message: 'Please enter this employee\'s first name',
+            when: ({ action }) => action === 'Add an employee',
+        },
+        {
+            name: 'employeeLastName',
+            type: 'input',
+            message: 'Please enter this employee\'s last name',
+            when: ({ action }) => action === 'Add an employee',
+        },
+        {
+            name: 'employeeRole',
+            type: 'list',
+            message: 'Please choose this employee\'s role',
+            choices: getRoleList,
+            when: ({ action }) => action === 'Add an employee',
+        },
+        {
+            name: 'employeeManager',
+            type: 'list',
+            message: 'Please choose this employee\'s manager',
+            choices: getManagerList,
+            when: ({ action }) => action === 'Add an employee',
         }
     ])
 };
@@ -60,7 +109,6 @@ const promptMainMenu = (choiceList) => {
 
 // main function to initialize application
 const init = () => {
-    // getChoiceList()
     promptMainMenu()
     .then(({ action, ...addPrompts }) => {
         const get = new getQuery;
@@ -82,6 +130,10 @@ const init = () => {
                 const { roleName, roleSalary, roleDepartment } = addPrompts;
                 add.role(roleName, roleSalary, roleDepartment);
                 break;
+            case 'Add an employee':
+                const { employeeFirstName, employeeLastName, employeeRole, employeeManager } = addPrompts;
+                add.employee(employeeFirstName, employeeLastName, employeeRole, employeeManager);
+                break;    
             default: 
                 console.log(addPrompts.department);
         }
@@ -93,4 +145,3 @@ const init = () => {
 };
 
 init();
-// getChoiceList();
