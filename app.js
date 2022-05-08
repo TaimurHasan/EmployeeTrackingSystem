@@ -1,8 +1,9 @@
 const inquirer = require('inquirer');
 const db = require('./db/connection');
-const addQuery = require('./lib/addQueries');
-const getQuery = require('./lib/getQueries');
-const choiceQuery = require('./lib/choiceQueries');
+const addQuery = require('./queries/addQueries');
+const getQuery = require('./queries/getQueries');
+const updateQuery = require('./queries/updateQueries')
+const choiceQuery = require('./queries/choiceQueries');
 
 // get department choices from sql query to use in inquirer prompts
 const getDepartmentList = () => {
@@ -102,6 +103,20 @@ const promptMainMenu = () => {
             message: 'Please choose this employee\'s manager',
             choices: getManagerList,
             when: ({ action }) => action === 'Add an employee',
+        },
+        {
+            name: 'employeeToUpdate',
+            type: 'list',
+            message: 'Please choose the employee you wish to update',
+            choices: getManagerList,
+            when: ({ action }) => action === 'Update employee role',
+        },
+        {
+            name: 'employeeNewRole',
+            type: 'list',
+            message: 'Please choose this employee\'s new role',
+            choices: getRoleList,
+            when: ({ action }) => action === 'Update employee role',
         }
     ])
 };
@@ -113,6 +128,8 @@ const init = () => {
     .then(({ action, ...addPrompts }) => {
         const get = new getQuery;
         const add = new addQuery;
+        const update = new updateQuery;
+
         switch(action) {
             case 'View all departments':
                 get.allDepartments();
@@ -133,7 +150,11 @@ const init = () => {
             case 'Add an employee':
                 const { employeeFirstName, employeeLastName, employeeRole, employeeManager } = addPrompts;
                 add.employee(employeeFirstName, employeeLastName, employeeRole, employeeManager);
-                break;    
+                break;
+            case 'Update employee role':
+                const { employeeToUpdate, employeeNewRole } = addPrompts;
+                update.employee(employeeToUpdate, employeeNewRole);
+                break;       
             default: 
                 console.log(addPrompts.department);
         }
@@ -144,4 +165,5 @@ const init = () => {
     })
 };
 
+// initalize app
 init();

@@ -1,6 +1,5 @@
 const db = require('../db/connection');
 const cTable = require('console.table');
-const { off } = require('../db/connection');
 
 // class for all sql queries to get information
 class addQuery{
@@ -25,7 +24,7 @@ class addQuery{
         .then(( [result] ) => {
             // send id received from result at zero index to insert query
             const sql = `INSERT INTO role (title, salary, department_id) 
-                            VALUES ('${title}', '${salary}', '${result[0].id}')`;
+                            VALUES ('${title}', '${salary}', ${result[0].id})`;
             db.promise().query(sql)
             .then(( [result] ) => {
                 if(!result.affectedRows) {
@@ -58,7 +57,7 @@ class addQuery{
             })
             .then(( { manager, role }) => {
                 const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) 
-                                VALUES ('${first_name}', '${last_name}', '${role[0].id}', '${manager[0].id}')`;
+                                VALUES ('${first_name}', '${last_name}', ${role[0].id}, ${manager[0].id})`;
                 db.promise().query(sql)
                 .then(( [result] ) => {
                     if(!result.affectedRows) {
