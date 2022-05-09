@@ -10,6 +10,9 @@ class getQuery{
             // console log table with a line break
             console.table('\n','Departments', rows);
         })
+        .catch(err => {
+            console.log(err);
+        });
     };
 
     allRoles() {
@@ -21,6 +24,9 @@ class getQuery{
         db.promise().query(sql) 
         .then(([rows, fields]) => {
             console.table('\n','Roles', rows);
+        })
+        .catch(err => {
+            console.log(err);
         });
     };
 
@@ -37,6 +43,9 @@ class getQuery{
         db.promise().query(sql)
         .then(( [rows, fields ] ) => {
             console.table('\n','Employees', rows);
+        })
+        .catch(err => {
+            console.log(err);
         });
     };
 }

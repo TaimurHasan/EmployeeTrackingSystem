@@ -1,5 +1,4 @@
 const db = require('../db/connection');
-const cTable = require('console.table');
 
 // class for all sql queries to get information
 class addQuery{
@@ -14,6 +13,9 @@ class addQuery{
             };
 
             console.log('Department added successfully!');
+        })
+        .catch(err => {
+            console.log(err);
         });
     };
 
@@ -34,7 +36,13 @@ class addQuery{
                 };
 
                 console.log('Role added successfully!');
+            })
+            .catch(err => {
+                console.log(err);
             });
+        })
+        .catch(err => {
+            console.log(err);
         });
     };
 
@@ -67,8 +75,17 @@ class addQuery{
                     };
 
                     console.log('Role added successfully');
+                })
+                .catch(err => {
+                    console.log(err);
                 });
+            })
+            .catch(err => {
+                console.log(err);
             });
+        })
+        .catch(err => {
+            console.log(err);
         });
     };
 };

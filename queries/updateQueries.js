@@ -17,7 +17,13 @@ class updateQuery{
                 };
 
                 console.log('Employee role updated successfully!');
+            })
+            .catch(err => {
+                console.log(err);
             });
+        })
+        .catch(err => {
+            console.log(err);
         });
     };
 };

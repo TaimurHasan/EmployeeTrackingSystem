@@ -38,7 +38,7 @@ const init = () => {
                 update.employee(employeeToUpdate, employeeNewRole);
                 break;       
             default: 
-                console.log(addPrompts.department);
+                console.log('No selection');
         }
     })
     .then(() => {
