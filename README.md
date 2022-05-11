@@ -41,7 +41,7 @@ To install the application, please follow the steps listed below:
 <a name="usage"></a>
 
 ## Usage
-To use this application, please utilize the main menu, which will pop up after initializing the file using ```node app.js```. From there, you will be required to use the arrow keys to navigate through the different options and hit enter for the chosen selection. The application will automatically take you back to the main menu after completing an action.
+To use this application, please utilize the main menu, which will pop up after initializing the app using ```node app.js```. From there, you will be required to use the arrow keys to navigate through the different options and hit enter for the chosen selection. The application will automatically take you back to the main menu after completing an action.
 
 For more details, please refer to the [walkthrough video](https://drive.google.com/file/d/1CPpJXRsHzH_tuJkjUKHQ9GjNk0Pf-OMg/view).
 
