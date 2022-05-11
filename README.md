@@ -31,7 +31,7 @@ To install the application, please follow the steps listed below:
 4. Initialize the NPM registry, as it hosts the required packages needed to run this application, using ```npm init -y```. <br/>
 5. Navigate to the '.env.EXAMPLE' file provided in this repository, edit the empty strings for 'user' and 'password' to contain your MySQL login information.
 6. Rename the '.env.EXAMPLE' file to '.env' and ensure it is saved
-7. Run ```mysql -u root -p``` to login into sql and run the following code lines to pre-populate the database and its tables:
+7. Run ```mysql -u root -p``` to login into sql and run the following code lines to initialize the database and pre-populate its tables:
 - ```source db/db.sql```
 - ```source db/schema.sql```
 - ```source db/seeds.sql``` 
