@@ -35,13 +35,15 @@ To install the application, please follow the steps listed below:
 - ```source db/db.sql```
 - ```source db/schema.sql```
 - ```source db/seeds.sql``` 
-5. Install the required packages using 'npm i'. <br/>
-6. Call the application using node app.js to launch! 
+8. Install the required packages using 'npm i'. <br/>
+9. Call the application using node app.js to launch! 
 
 <a name="usage"></a>
 
 ## Usage
 To use this application, please utilize the main menu, which will pop up after initializing the file using ```node app.js```. From there, you will be required to use the arrow keys to navigate through the different options and hit enter for the chosen selection. The application will automatically take you back to the main menu after completing an action.
+
+For more details, please refer to the [walkthrough video](https://drive.google.com/file/d/1CPpJXRsHzH_tuJkjUKHQ9GjNk0Pf-OMg/view).
 
 
 <a name="license"></a>
