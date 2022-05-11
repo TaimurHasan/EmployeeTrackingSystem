@@ -74,7 +74,7 @@ class addQuery{
                         return;
                     };
 
-                    console.log('Role added successfully');
+                    console.log('Employee added successfully');
                 })
                 .catch(err => {
                     console.log(err);
