@@ -1,6 +1,7 @@
 # EmployeeTrackingSystem
 ## Description
-![Employee Tracking System by Taimur Screenshot](./assets/images/Screenshot%202022-05-10%20222920.png)
+![Employee Tracking System by Taimur Screenshot](./assets/images/Screenshot%202022-05-10%20222920.png) <br/>
+
 The Employee Tracking System is a command-line application, which was built using node.js and the MySQL database management system. It allows the user to create, edit, and view departments, roles, and employees as part of an organization - all from the command line! 
 <br/>
 <br/>
