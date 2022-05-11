@@ -2,6 +2,7 @@ const promptMainMenu = require('./lib/inquirerPrompt');
 const addQuery = require('./queries/addQueries');
 const getQuery = require('./queries/getQueries');
 const updateQuery = require('./queries/updateQueries')
+const removeQuery = require('./queries/removeQueries');
 
 // main function to initialize application
 const init = () => {
@@ -10,6 +11,7 @@ const init = () => {
         const get = new getQuery;
         const add = new addQuery;
         const update = new updateQuery;
+        const remove = new removeQuery;
 
         // switch case to run through all main menu options and their respective responses
         switch(action) {
@@ -36,7 +38,19 @@ const init = () => {
             case 'Update employee role':
                 const { employeeToUpdate, employeeNewRole } = addPrompts;
                 update.employee(employeeToUpdate, employeeNewRole);
-                break;       
+                break;
+            case 'Delete a department':
+                const { departmentToDelete } = addPrompts;
+                remove.department(departmentToDelete);
+                break;
+            case 'Delete a role':
+                const { roleToDelete } = addPrompts;
+                remove.role(roleToDelete);
+                break;
+            case 'Delete an employee':
+                const { employeeToDelete } = addPrompts;
+                remove.employee(employeeToDelete);
+                break;          
             default: 
                 console.log('No selection');
         }

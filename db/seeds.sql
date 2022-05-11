@@ -17,7 +17,7 @@ VALUES
 
 INSERT INTO employee(first_name, last_name, role_id, manager_id)
 VALUES
-    ('Taimur', 'Hasan', 4, NULL),
+    ('Your', 'Name', 4, NULL),
     ('Tony', 'Stark', 5, 1),
     ('Crash', 'Bandicoot', 2, NULL),
     ('Jerry', 'The Mouse', 1, 3),

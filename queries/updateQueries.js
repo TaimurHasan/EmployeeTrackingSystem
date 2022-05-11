@@ -1,7 +1,6 @@
 const db = require('../db/connection');
-const cTable = require('console.table');
 
-// class for all sql queries to get information
+// class for all sql queries to update information
 class updateQuery{
     employee(full_name, role) {
         // get the relevant role id from table using role name

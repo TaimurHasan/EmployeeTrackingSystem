@@ -36,7 +36,4 @@ class choiceQuery{
     };
 }
 
-const choice = new choiceQuery
-choice.allEmployees();
-
 module.exports = choiceQuery;

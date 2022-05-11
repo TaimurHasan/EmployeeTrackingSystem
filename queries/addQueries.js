@@ -1,6 +1,6 @@
 const db = require('../db/connection');
 
-// class for all sql queries to get information
+// class for all sql queries to add information
 class addQuery{
     department(name) {
         const sql = `INSERT INTO department (name) VALUES ('${name}')`;
