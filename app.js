@@ -6,13 +6,15 @@ const removeQuery = require('./queries/removeQueries');
 
 // main function to initialize application
 const init = () => {
+
+    // adding new objects with necessary query functions
+    const get = new getQuery;
+    const add = new addQuery;
+    const update = new updateQuery;
+    const remove = new removeQuery;
+
     promptMainMenu()
     .then(({ action, ...addPrompts }) => {
-        const get = new getQuery;
-        const add = new addQuery;
-        const update = new updateQuery;
-        const remove = new removeQuery;
-
         // switch case to run through all main menu options and their respective responses
         switch(action) {
             case 'View all departments':
